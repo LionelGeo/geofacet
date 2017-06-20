@@ -1,0 +1,704 @@
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc" />
+
+    <meta name="author" content="Ryan Hafen" />
+  
+  
+  <title>geofacet</title>
+
+    <script src="rd_files/jquery-1.11.3/jquery.min.js"></script>
+  <link href="rd_files/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="rd_files/bootstrap-3.3.2/js/bootstrap.min.js"></script>
+  <script src="rd_files/bootstrap-3.3.2/shim/html5shiv.min.js"></script>
+  <script src="rd_files/bootstrap-3.3.2/shim/respond.min.js"></script>
+  <link href="rd_files/highlight-8.4/tomorrow.css" rel="stylesheet" />
+  <script src="rd_files/highlight-8.4/highlight.pack.js"></script>
+  <link href="rd_files/fontawesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+  <script src="rd_files/stickykit-1.1.1/sticky-kit.min.js"></script>
+  <script src="rd_files/jqueryeasing-1.3/jquery.easing.min.js"></script>
+  <link href="rd_files/recliner-0.2.2/recliner.css" rel="stylesheet" />
+  <script src="rd_files/recliner-0.2.2/recliner.min.js"></script>
+  <script src="rd_files/recliner-0.2.2/onload.js"></script>
+  <link href="rd_files/packagedocs-0.0.1/pd.css" rel="stylesheet" />
+  <script src="rd_files/packagedocs-0.0.1/pd.js"></script>
+  <script src="rd_files/packagedocs-0.0.1/pd-sticky-toc.js"></script>
+  
+  
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+
+<body>
+
+  
+  <header class="navbar navbar-white navbar-fixed-top" role="banner" id="header">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+                <a href="index.html" class="navbar-brand page-scroll">
+        geofacet
+        </a>
+      </div>
+            <nav class="collapse navbar-collapse" role="navigation">
+        <ul class="nav nav-pills pull-right">
+<li>
+<a href='docs.html'>Docs</a>
+</li>
+<li class="active">
+<a href='rd.html'>Package Ref</a>
+</li>
+<li>
+<a href='https://twitter.com/hafenstats' target='_blank'><i class="fa fa-twitter"></i></span></a>
+</li>
+        </ul>
+      </nav>
+          </div>
+  </header>
+
+  <!-- Begin Body -->
+  <div class="container">
+    <div class="row">
+            <div class="col-md-3" id="sidebar-col">
+        <div id="toc">
+          <ul>
+          <li><a href="#package-functions">Package Functions</a><ul>
+          <li><a href="#facet_geo">facet_geo</a></li>
+          <li><a href="#get_grid_names">get_grid_names</a></li>
+          <li><a href="#grid_design">grid_design</a></li>
+          <li><a href="#grid_preview">grid_preview</a></li>
+          <li><a href="#grid_submit">grid_submit</a></li>
+          </ul></li>
+          <li><a href="#grids">Grids</a><ul>
+          <li><a href="#grids-1">grids</a></li>
+          </ul></li>
+          <li><a href="#datasets">Datasets</a><ul>
+          <li><a href="#aus_pop">aus_pop</a></li>
+          <li><a href="#election">election</a></li>
+          <li><a href="#eu_gdp">eu_gdp</a></li>
+          <li><a href="#eu_imm">eu_imm</a></li>
+          <li><a href="#india_pop">india_pop</a></li>
+          <li><a href="#london_afford">london_afford</a></li>
+          <li><a href="#nhs_scot_dental">nhs_scot_dental</a></li>
+          <li><a href="#sa_pop_dens">sa_pop_dens</a></li>
+          <li><a href="#state_ranks">state_ranks</a></li>
+          <li><a href="#state_unemp">state_unemp</a></li>
+          </ul></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-9" id="content-col">
+      
+<div id="content-top"></div>
+<h1>
+‘ggplot2’ Faceting Utilities for Geographical Data
+</h1>
+<p>
+<strong>Authors:</strong> <a href="mailto:rhafen@gmail.com">Ryan Hafen</a> [aut, cre]
+</p>
+<p>
+<strong>Version:</strong> 0.1.4
+</p>
+<p>
+<strong>License:</strong> MIT + file LICENSE
+</p>
+<h4>
+Description
+</h4>
+<p>
+Provides geofaceting functionality for ‘ggplot2’. Geofaceting arranges a sequence of plots of data for different geographical entities into a grid that preserves some of the geographical orientation.
+</p>
+<h4>
+Depends
+</h4>
+<p>
+R (&gt;= 3.3.2)
+</p>
+<h4>
+Imports
+</h4>
+<p>
+ggplot2, gtable, graphics
+</p>
+<h4>
+Suggests
+</h4>
+<p>
+testthat, covr, lintr, knitr, rmarkdown, packagedocs
+</p>
+<div id="package-functions" class="section level1">
+<h1>Package Functions</h1>
+<div id="facet_geo" class="section level2">
+<h2>facet_geo</h2>
+<a id="facet_geo_alias"></a>
+<h3>
+Arrange a sequence of geographical panels into a grid that preserves some geographical orientation
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code><div>facet_geo(facets, ..., grid&nbsp;=&nbsp;"us_state_grid1", label&nbsp;=&nbsp;NULL, move_axes&nbsp;=&nbsp;TRUE)</div></code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+facets
+</dt>
+<dd class="rd-dd">
+passed to <code><a href=http://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap>facet_wrap</a></code>
+</dd>
+<dt>
+grid
+</dt>
+<dd class="rd-dd">
+character vector of the grid layout to use (currently only “us_state_grid1” and “us_state_grid2” are available)
+</dd>
+<dt>
+label
+</dt>
+<dd class="rd-dd">
+an optional string denoting the name of a column in <code>grid</code> to use for facet labels. If NULL, the variable that best matches that in the data specified with <code>facets</code> will be used for the facet labels.
+</dd>
+<dt>
+move_axes
+</dt>
+<dd class="rd-dd">
+should axis labels and ticks be moved to the closest panel along the margins?
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional parameters passed to <code><a href=http://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap>facet_wrap</a></code>
+</dd>
+</dl>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>## Not run: 
+# library(ggplot2)
+# 
+# # barchart of state rankings in various categories
+# ggplot(state_ranks, aes(variable, rank, fill = variable)) +
+#   geom_col() +
+#   coord_flip() +
+#   facet_geo(~ state) +
+#   theme_bw()
+# 
+# # use an alternative US state grid and place
+# ggplot(state_ranks, aes(variable, rank, fill = variable)) +
+#   geom_col() +
+#   coord_flip() +
+#   facet_geo(~ state, grid = &quot;us_state_grid2&quot;) +
+#   theme(panel.spacing = unit(0.1, &quot;lines&quot;))
+# 
+# # custom grid (move Wisconsin above Michigan)
+# my_grid &lt;- us_state_grid1
+# my_grid$col[my_grid$code == &quot;WI&quot;] &lt;- 7
+# 
+# ggplot(state_ranks, aes(variable, rank, fill = variable)) +
+#   geom_col() +
+#   coord_flip() +
+#   facet_geo(~ state, grid = my_grid)
+# 
+# # plot unemployment rate time series for each state
+# ggplot(state_unemp, aes(year, rate)) +
+#   geom_line() +
+#   facet_geo(~ state) +
+#   scale_x_continuous(labels = function(x) paste0(&quot;&#39;&quot;, substr(x, 3, 4))) +
+#   ylab(&quot;Unemployment Rate (%)&quot;)
+# 
+# # plot the 2016 unemployment rate
+# ggplot(subset(state_unemp, year == 2016), aes(factor(year), rate)) +
+#   geom_col(fill = &quot;steelblue&quot;) +
+#   facet_geo(~ state) +
+#   theme(
+#     axis.title.x = element_blank(),
+#     axis.text.x = element_blank(),
+#     axis.ticks.x = element_blank()) +
+#   ylab(&quot;Unemployment Rate (%)&quot;) +
+#   xlab(&quot;Year&quot;)
+# 
+# # plot European Union GDP
+# ggplot(eu_gdp, aes(year, gdp_pc)) +
+#   geom_line(color = &quot;steelblue&quot;) +
+#   geom_hline(yintercept = 100, linetype = 2) +
+#   facet_geo(~ name, grid = &quot;eu_grid1&quot;) +
+#   scale_x_continuous(labels = function(x) paste0(&quot;&#39;&quot;, substr(x, 3, 4))) +
+#   ylab(&quot;GDP Per Capita&quot;) +
+#   theme_bw()
+# 
+# # use a free x-axis to look at just change
+# ggplot(eu_gdp, aes(year, gdp_pc)) +
+#   geom_line(color = &quot;steelblue&quot;) +
+#   facet_geo(~ name, grid = &quot;eu_grid1&quot;, scales = &quot;free_y&quot;) +
+#   scale_x_continuous(labels = function(x) paste0(&quot;&#39;&quot;, substr(x, 3, 4))) +
+#   ylab(&quot;GDP Per Capita in Relation to EU Index (100)&quot;) +
+#   theme_bw()
+# # would be nice if ggplot2 had a &quot;sliced&quot; option...
+# # (for example, there&#39;s not much going on with Denmark but it looks like there is)
+# 
+# # plot European Union annual # of resettled persons
+# ggplot(eu_imm, aes(year, persons)) +
+#   geom_line() +
+#   facet_geo(~ name, grid = &quot;eu_grid1&quot;) +
+#   scale_x_continuous(labels = function(x) paste0(&quot;&#39;&quot;, substr(x, 3, 4))) +
+#   scale_y_sqrt(minor_breaks = NULL) +
+#   ylab(&quot;# Resettled Persons&quot;) +
+#   theme_bw()
+# 
+# # plot just for 2016
+# ggplot(subset(eu_imm, year == 2016), aes(factor(year), persons)) +
+#   geom_col(fill = &quot;steelblue&quot;) +
+#   geom_text(aes(factor(year), 3000, label = persons), color = &quot;gray&quot;) +
+#   facet_geo(~ name, grid = &quot;eu_grid1&quot;) +
+#   theme(
+#     axis.title.x = element_blank(),
+#     axis.text.x = element_blank(),
+#     axis.ticks.x = element_blank()) +
+#   ylab(&quot;# Resettled Persons in 2016&quot;) +
+#   xlab(&quot;Year&quot;) +
+#   theme_bw()
+# 
+# # plot Australian population
+# ggplot(aus_pop, aes(age_group, pop / 1e6, fill = age_group)) +
+#   geom_col() +
+#   facet_geo(~ code, grid = &quot;aus_grid1&quot;) +
+#   coord_flip() +
+#   labs(
+#     title = &quot;Australian Population Breakdown&quot;,
+#     caption = &quot;Data Source: ABS Labour Force Survey, 12 month average&quot;,
+#     y = &quot;Population [Millions]&quot;) +
+#   theme_bw()
+# 
+# # South Africa population density by province
+# ggplot(sa_pop_dens, aes(factor(year), density, fill = factor(year))) +
+#   geom_col() +
+#   facet_geo(~ province, grid = &quot;sa_prov_grid1&quot;) +
+#   labs(title = &quot;South Africa population density by province&quot;,
+#     caption = &quot;Data Source: Statistics SA Census&quot;,
+#     y = &quot;Population density per square km&quot;) +
+#   theme_bw()
+# 
+# # use the Afrikaans name stored in the grid, &quot;name_af&quot;, as facet labels
+# ggplot(sa_pop_dens, aes(factor(year), density, fill = factor(year))) +
+#   geom_col() +
+#   facet_geo(~ code, grid = &quot;sa_prov_grid1&quot;, label = &quot;name_af&quot;) +
+#   labs(title = &quot;South Africa population density by province&quot;,
+#     caption = &quot;Data Source: Statistics SA Census&quot;,
+#     y = &quot;Population density per square km&quot;) +
+#   theme_bw()
+# 
+# # affordable housing starts by year for boroughs in London
+# ggplot(london_afford, aes(x = year, y = starts, fill = year)) +
+#   geom_col(position = position_dodge()) +
+#   facet_geo(~ code, grid = &quot;london_boroughs_grid&quot;, label = &quot;name&quot;) +
+#   labs(title = &quot;Affordable Housing Starts in London&quot;,
+#     subtitle = &quot;Each Borough, 2015-16 to 2016-17&quot;,
+#     caption = &quot;Source: London Datastore&quot;, x = &quot;&quot;, y = &quot;&quot;)
+# 
+# # dental health in Scotland
+# ggplot(nhs_scot_dental, aes(x = year, y = percent)) +
+#   geom_line() +
+#   facet_geo(~ name, grid = &quot;nhs_scot_grid&quot;) +
+#   scale_x_continuous(breaks = c(2004, 2007, 2010, 2013)) +
+#   scale_y_continuous(breaks = c(40, 60, 80)) +
+#   labs(title = &quot;Child Dental Health in Scotland&quot;,
+#     subtitle = &quot;Percentage of P1 children in Scotland with no obvious decay experience.&quot;,
+#     caption = &quot;Source: statistics.gov.scot&quot;, x = &quot;&quot;, y = &quot;&quot;)
+# 
+# # India population breakdown
+# ggplot(subset(india_pop, type == &quot;state&quot;),
+#   aes(pop_type, value / 1e6, fill = pop_type)) +
+#   geom_col() +
+#   facet_geo(~ name, grid = &quot;india_grid1&quot;, label = &quot;code&quot;) +
+#   labs(title = &quot;Indian Population Breakdown&quot;,
+#        caption = &quot;Data Source: Wikipedia&quot;,
+#        x = &quot;&quot;,
+#        y = &quot;Population [Millions]&quot;) +
+#   theme_bw() +
+#   theme(axis.text.x = element_text(angle = 40, hjust = 1))
+# 
+# ggplot(subset(india_pop, type == &quot;state&quot;),
+#   aes(pop_type, value / 1e6, fill = pop_type)) +
+#   geom_col() +
+#   facet_geo(~ name, grid = &quot;india_grid2&quot;, label = &quot;name&quot;) +
+#   labs(title = &quot;Indian Population Breakdown&quot;,
+#        caption = &quot;Data Source: Wikipedia&quot;,
+#        x = &quot;&quot;,
+#        y = &quot;Population [Millions]&quot;) +
+#   theme_bw() +
+#   theme(axis.text.x = element_text(angle = 40, hjust = 1),
+#     strip.text.x = element_text(size = 6))
+# 
+# # A few ways to look at the 2016 election results
+# ggplot(election, aes(&quot;&quot;, pct, fill = candidate)) +
+#   geom_col(alpha = 0.8, width = 1) +
+#   scale_fill_manual(values = c(&quot;#4e79a7&quot;, &quot;#e15759&quot;, &quot;#59a14f&quot;)) +
+#   facet_geo(~ state, grid = &quot;us_state_grid2&quot;) +
+#   scale_y_continuous(expand = c(0, 0)) +
+#   labs(title = &quot;2016 Election Results&quot;,
+#     caption = &quot;Data Source: http://bit.ly/2016votecount&quot;,
+#     x = NULL,
+#     y = &quot;Percentage of Voters&quot;) +
+#   theme(axis.title.x = element_blank(),
+#     axis.text.x = element_blank(),
+#     axis.ticks.x = element_blank(),
+#     strip.text.x = element_text(size = 6))
+# 
+# ggplot(election, aes(candidate, pct, fill = candidate)) +
+#   geom_col() +
+#   scale_fill_manual(values = c(&quot;#4e79a7&quot;, &quot;#e15759&quot;, &quot;#59a14f&quot;)) +
+#   facet_geo(~ state, grid = &quot;us_state_grid2&quot;) +
+#   theme_bw() +
+#   coord_flip() +
+#   labs(title = &quot;2016 Election Results&quot;,
+#     caption = &quot;Data Source: http://bit.ly/2016votecount&quot;,
+#     x = NULL,
+#     y = &quot;Percentage of Voters&quot;) +
+#   theme(strip.text.x = element_text(size = 6))
+# 
+# ggplot(election, aes(candidate, votes / 1000000, fill = candidate)) +
+#   geom_col() +
+#   scale_fill_manual(values = c(&quot;#4e79a7&quot;, &quot;#e15759&quot;, &quot;#59a14f&quot;)) +
+#   facet_geo(~ state, grid = &quot;us_state_grid2&quot;) +
+#   coord_flip() +
+#   labs(title = &quot;2016 Election Results&quot;,
+#     caption = &quot;Data Source: http://bit.ly/2016votecount&quot;,
+#     x = NULL,
+#     y = &quot;Votes (millions)&quot;) +
+#   theme(strip.text.x = element_text(size = 6))
+# ## End(Not run)</code></pre>
+</div>
+<div id="get_grid_names" class="section level2">
+<h2>get_grid_names</h2>
+<a id="get_grid_names_alias"></a>
+<h3>
+Get a list of valid grid names
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code><div>get_grid_names()</div></code></pre>
+</div>
+<div id="grid_design" class="section level2">
+<h2>grid_design</h2>
+<a id="grid_design_alias"></a>
+<h3>
+Interactively design a grid
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code><div>grid_design(data&nbsp;=&nbsp;NULL, img&nbsp;=&nbsp;NULL)</div></code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+data
+</dt>
+<dd class="rd-dd">
+a data frame containing a grid to start from or NULL if starting from scratch
+</dd>
+<dt>
+img
+</dt>
+<dd class="rd-dd">
+optional URL pointing to a reference image containing a geographic map of the entities in the grid
+</dd>
+</dl>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># edit aus_grid1
+grid_design(data = aus_grid1, img = &quot;http://www.john.chapman.name/Austral4.gif&quot;)
+# start with a clean slate
+grid_design()
+# arrange the alphabet
+grid_design(data.frame(code = letters))</code></pre>
+</div>
+<div id="grid_preview" class="section level2">
+<h2>grid_preview</h2>
+<a id="grid_preview_alias"></a>
+<h3>
+Plot a preview of a grid
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code><div>grid_preview(x, label&nbsp;=&nbsp;NULL)</div></code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+a data frame containing a grid
+</dd>
+<dt>
+label
+</dt>
+<dd class="rd-dd">
+the column should be used for text labels
+</dd>
+</dl>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>grid_preview(us_state_grid2)
+grid_preview(eu_grid1, label = &quot;name&quot;)</code></pre>
+</div>
+<div id="grid_submit" class="section level2">
+<h2>grid_submit</h2>
+<a id="grid_submit_alias"></a>
+<h3>
+Submit a grid to be included in the package
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code><div>grid_submit(x, name&nbsp;=&nbsp;NULL, desc&nbsp;=&nbsp;NULL)</div></code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+a data frame containing a grid
+</dd>
+<dt>
+name
+</dt>
+<dd class="rd-dd">
+proposed name of the grid (if not supplied, will be asked for interactively)
+</dd>
+<dt>
+desc
+</dt>
+<dd class="rd-dd">
+a description of the grid (if not supplied, will be asked for interactively)
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+This opens up a github issue for this package in the web browser with pre-populated content for adding a grid to the package.
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>## Not run: 
+# my_grid &lt;- us_state_grid1
+# my_grid$col[my_grid$label == &quot;WI&quot;] &lt;- 7
+# grid_submit(my_grid, name = &quot;us_grid_tweak_wi&quot;,
+#   desc = &quot;Modified us_state_grid1 to move WI over&quot;)
+# ## End(Not run)</code></pre>
+</div>
+</div>
+<div id="grids" class="section level1">
+<h1>Grids</h1>
+<div id="grids-1" class="section level2">
+<h2>grids</h2>
+<a id="grids_alias"></a>
+<h3>
+Geo Grids
+</h3>
+<p class="rd-p">
+See <code><a href='facet_geo.html'>facet_geo</a></code> for several examples. <strong>us_state_grid1:</strong> Grid layout for US states (including DC) Image reference <a href = 'https://images7.alphacoders.com/687/687665.jpg'>here</a>. <strong>us_state_grid2:</strong> Grid layout for US states (including DC) Image reference <a href = 'https://images7.alphacoders.com/687/687665.jpg'>here</a>. <strong>eu_grid1:</strong> Grid layout for the 28 EU Countries Image reference <a href = 'https://ichef.bbci.co.uk/news/660/media/images/70233000/gif/_70233868_eunames.gif'>here</a>. <strong>aus_grid1:</strong> Grid layout for the Australian States and Territories. Image reference <a href = 'https://cloud.githubusercontent.com/assets/9496865/26334627/75a729d2-3fa5-11e7-88af-a1dd86b7ddf3.png'>here</a>. Thanks to <a href = 'https://github.com/jonocarroll'>https://github.com/jonocarroll</a>. <strong>sa_prov_grid1:</strong> Grid layout for the provinces of South Africa Image reference <a href = 'https://camo.githubusercontent.com/a90b18a1ab0c36200da9b118141b997b3f22638e/687474703a2f2f7777772e6578706c6f7265736f7574686166726963612e6e65742f696d616765732f70726f766d61702e6a7067'>here</a>. Thanks to <a href = 'https://github.com/jonmcalder'>https://github.com/jonmcalder</a>. <strong>london_boroughs_grid:</strong> Grid layout for the boroughs of London. Note that the column <code>code_ons</code> contains the <a href = 'http://geoportal.statistics.gov.uk/datasets/464be6191a434a91a5fa2f52c7433333_0?uiTab=table'>codes</a> used by UK Office for National Statistics. Image reference <a href = 'https://cloud.githubusercontent.com/assets/13021448/26399784/3133d684-4076-11e7-8eac-1e74d023bf18.jpg'>here</a>. Thanks to <a href = 'https://github.com/eldenvo'>https://github.com/eldenvo</a>. <strong>nhs_scot_grid:</strong> Grid layout for a grid of National Health Service (NHS) Scotland Health Boards. Note that the column <code>code</code> contains the <a href = 'http://geoportal.statistics.gov.uk/datasets/61dca36aa33e4aee99bbfa784fa9eb25_0?uiTab=table'>codes</a> used by UK Office for National Statistics. Image reference <a href = 'https://cloud.githubusercontent.com/assets/24879214/26426113/253658d0-40cf-11e7-88b5-fe5ee7fda44f.png'>here</a>. Thanks to <a href = 'https://github.com/josephjosephadams'>https://github.com/josephjosephadams</a>. <strong>india_grid1:</strong> Grid layout for India states (not including union territories). Image reference <a href = 'https://cloud.githubusercontent.com/assets/11698124/26569168/dd2ca86c-44bd-11e7-9d74-af919522f7b1.jpg'>here</a>. Thanks to <a href = 'https://github.com/meysubb'>https://github.com/meysubb</a>. <strong>india_grid2:</strong> Grid layout for India states (not including union territories). Image reference <a href = 'https://cloud.githubusercontent.com/assets/11698124/26569168/dd2ca86c-44bd-11e7-9d74-af919522f7b1.jpg'>here</a>. <strong>argentina_grid1:</strong> Grid for the 23 provinces of Argentina. It includes the Malvinas/Falkland Islands and the Antarctic Territories (these are disputed, but they are included since many researchers might use data from these locations). Image reference <a href = 'https://s-media-cache-ak0.pinimg.com/736x/bf/cb/96/bfcb9654477c127d3b0e0b72d5be65fc.jpg'>here</a>. Thanks to <a href = 'https://github.com/eliocamp'>https://github.com/eliocamp</a>. <strong>br_grid1:</strong> Grid for the 27 states of Brazil. Image reference <a href = 'https://camo.githubusercontent.com/477627dce2610f18f1bf3850cd32fca01610656e/687474703a2f2f63656a656475696e66616e74696c2e7062776f726b732e636f6d2f662f313435383034313938342f4d61706142726173696c5369676c61732e676966'>here</a>. Thanks to <a href = 'https://github.com/italocegatta'>https://github.com/italocegatta</a>.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code><div>us_state_grid1</div>
+<div>us_state_grid2</div>
+<div>eu_grid1</div>
+<div>aus_grid1</div>
+<div>sa_prov_grid1</div>
+<div>london_boroughs_grid</div>
+<div>nhs_scot_grid</div>
+<div>india_grid1</div>
+<div>india_grid2</div>
+<div>argentina_grid1</div>
+<div>br_grid1</div></code></pre>
+</div>
+</div>
+<div id="datasets" class="section level1">
+<h1>Datasets</h1>
+<div id="aus_pop" class="section level2">
+<h2>aus_pop</h2>
+<a id="aus_pop_alias"></a>
+<h3>
+aus_pop
+</h3>
+<p class="rd-p">
+March 2017 population data for Australian states and territories by age group. Source: <a href = 'http://lmip.gov.au/default.aspx?LMIP/Downloads/ABSLabourForceRegion'>http://lmip.gov.au/default.aspx?LMIP/Downloads/ABSLabourForceRegion</a>.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code><div>aus_pop</div></code></pre>
+</div>
+<div id="election" class="section level2">
+<h2>election</h2>
+<a id="election_alias"></a>
+<h3>
+election
+</h3>
+<p class="rd-p">
+2016 US presidential election results, obtained from <a href = 'http://bit.ly/2016votecount'>http://bit.ly/2016votecount</a>.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code><div>election</div></code></pre>
+</div>
+<div id="eu_gdp" class="section level2">
+<h2>eu_gdp</h2>
+<a id="eu_gdp_alias"></a>
+<h3>
+eu_gdp
+</h3>
+<p class="rd-p">
+GDP per capita in PPS - Index (EU28 = 100). “Gross domestic product (GDP) is a measure for the economic activity. It is defined as the value of all goods and services produced less the value of any goods or services used in their creation. The volume index of GDP per capita in Purchasing Power Standards (PPS) is expressed in relation to the European Union (EU28) average set to equal 100. If the index of a country is higher than 100, this country’s level of GDP per head is higher than the EU average and vice versa. Basic figures are expressed in PPS, i.e. a common currency that eliminates the differences in price levels between countries allowing meaningful volume comparisons of GDP between countries. Please note that the index, calculated from PPS figures and expressed with respect to EU28 = 100, is intended for cross-country comparisons rather than for temporal comparisons.” Source: <a href = 'http://ec.europa.eu/eurostat/web/national-accounts/data/main-tables'>http://ec.europa.eu/eurostat/web/national-accounts/data/main-tables</a>. Dataset ID: tec00114.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code><div>eu_gdp</div></code></pre>
+</div>
+<div id="eu_imm" class="section level2">
+<h2>eu_imm</h2>
+<a id="eu_imm_alias"></a>
+<h3>
+eu_imm
+</h3>
+<p class="rd-p">
+Annual number of resettled persons for each EU country. “Resettled refugees means persons who have been granted an authorization to reside in a Member State within the framework of a national or Community resettlement scheme.”. Source: <a href = 'http://ec.europa.eu/eurostat/cache/metadata/en/migr_asydec_esms.htm'>http://ec.europa.eu/eurostat/cache/metadata/en/migr_asydec_esms.htm</a>. Dataset ID: tps00195.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code><div>eu_imm</div></code></pre>
+</div>
+<div id="india_pop" class="section level2">
+<h2>india_pop</h2>
+<a id="india_pop_alias"></a>
+<h3>
+india_pop
+</h3>
+<p class="rd-p">
+2011 population data for India, broken down by urban and rural. Source: <a href = 'https://en.wikipedia.org/wiki/List_of_states_and_union_territories_of_India_by_population'>https://en.wikipedia.org/wiki/List_of_states_and_union_territories_of_India_by_population</a>.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code><div>india_pop</div></code></pre>
+</div>
+<div id="london_afford" class="section level2">
+<h2>london_afford</h2>
+<a id="london_afford_alias"></a>
+<h3>
+london_afford
+</h3>
+<p class="rd-p">
+Total affordable housing completions by financial year in each London borough since 2015/16. Source: <a href = 'https://data.london.gov.uk/dataset/dclg-affordable-housing-supply-borough'>https://data.london.gov.uk/dataset/dclg-affordable-housing-supply-borough</a>
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code><div>london_afford</div></code></pre>
+</div>
+<div id="nhs_scot_dental" class="section level2">
+<h2>nhs_scot_dental</h2>
+<a id="nhs_scot_dental_alias"></a>
+<h3>
+nhs_scot_dental
+</h3>
+<p class="rd-p">
+Child dental health data in Scotland. Source: <a href = 'http://statistics.gov.scot/data/child-dental-health'>http://statistics.gov.scot/data/child-dental-health</a>
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code><div>nhs_scot_dental</div></code></pre>
+</div>
+<div id="sa_pop_dens" class="section level2">
+<h2>sa_pop_dens</h2>
+<a id="sa_pop_dens_alias"></a>
+<h3>
+sa_pop_dens
+</h3>
+<p class="rd-p">
+Population density for each province in South Africa for 1996, 2001, and 2011. Source: <a href = 'https://en.wikipedia.org/wiki/List_of_South_African_provinces_by_population_density'>https://en.wikipedia.org/wiki/List_of_South_African_provinces_by_population_density</a>
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code><div>sa_pop_dens</div></code></pre>
+</div>
+<div id="state_ranks" class="section level2">
+<h2>state_ranks</h2>
+<a id="state_ranks_alias"></a>
+<h3>
+state_ranks
+</h3>
+<p class="rd-p">
+State rankings in the following categories with the variable upon which ranking is based in parentheses: education (adults over 25 with a bachelor’s degree in 2015), employment (March 2017 unemployment rate - Bureau of Labor Statistics), health (obesity rate from 2015 - Centers for Disease Control), insured (uninsured rate in 2015 - US Census), sleep (share of adults that report at least 7 hours of sleep each night from 2016 - Disease Control), wealth (poverty rate 2014/15 - US Census). In each category, the lower the ranking, the more favorable. This data is based on data presented here: <a href = 'https://www.axios.com/an-emoji-built-from-data-for-every-state-2408885674.html'>https://www.axios.com/an-emoji-built-from-data-for-every-state-2408885674.html</a>
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code><div>state_ranks</div></code></pre>
+</div>
+<div id="state_unemp" class="section level2">
+<h2>state_unemp</h2>
+<a id="state_unemp_alias"></a>
+<h3>
+state_unemp
+</h3>
+<p class="rd-p">
+Seasonally-adjusted December unemployment rate for each state (including DC) from 2000 to 2017. Obtained from bls.gov.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code><div>state_unemp</div></code></pre>
+</div>
+</div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <div class="container">
+      <div class="col-md-6">
+                <p>&copy; Ryan Hafen, 2017</p>
+              </div>
+      <div class="col-md-6">
+        <p class="pull-right">created with <a href="https://github.com/hafen/packagedocs">packagedocs</a>
+                  </p>
+      </div>
+    </div>
+  </div>
+
+  
+</body>
+</html>
